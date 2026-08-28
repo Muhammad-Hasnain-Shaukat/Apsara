@@ -29,7 +29,7 @@ export const ProductDetailPage: React.FC = () => {
 
   const { addItem } = useCartStore();
   const { toggleWishlist, isInWishlist } = useWishlistStore();
-  const { addToast } = useUIStore();
+  const { addToast, openCartDrawer } = useUIStore();
 
   useEffect(() => {
     async function loadData() {
@@ -78,6 +78,7 @@ export const ProductDetailPage: React.FC = () => {
   const handleAddToCart = () => {
     addItem(product, currentFinish?.label, quantity);
     addToast(`${quantity} × ${product.title} added to bag`, 'success');
+    openCartDrawer();
   };
 
   return (

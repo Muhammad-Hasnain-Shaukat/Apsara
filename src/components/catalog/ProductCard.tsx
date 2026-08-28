@@ -15,7 +15,7 @@ interface ProductCardProps {
 export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }) => {
   const { addItem } = useCartStore();
   const { toggleWishlist, isInWishlist } = useWishlistStore();
-  const { addToast } = useUIStore();
+  const { addToast, openCartDrawer } = useUIStore();
 
   const [selectedFinishIndex, setSelectedFinishIndex] = useState(0);
   const [isHovered, setIsHovered] = useState(false);
@@ -30,7 +30,8 @@ export const ProductCard: React.FC<ProductCardProps> = ({ product, onQuickView }
     e.stopPropagation();
     addItem(product, currentFinish?.label, 1);
     setAddedAnimation(true);
-    addToast(`${product.title} added to your bag`, 'success');
+    addToast(`${product.title} added to bag`, 'success');
+    openCartDrawer();
     setTimeout(() => setAddedAnimation(false), 2000);
   };
 
